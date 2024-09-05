@@ -10,7 +10,7 @@ namespace BlackJack
 
         private int sum = 0;
 
-        private List<Tuple<string, string>> cardsOnHand = [];
+        private List<Tuple<string, string>> cardsOnHand = new List<Tuple<string, string>>();
 
         public string userName
         {
@@ -60,33 +60,42 @@ namespace BlackJack
             return cardsOnHand.Count;
         }
 
+        private int GetCardValue(Tuple<string, string> card)
+        {
+            string cardValue = card.Item1;
+            if (new[] { "J", "Q", "K" }.Contains(cardValue))
+            {
+                return 10;
+            }
+            else if (cardValue == "A")
+            {
+                return 1;
+            }
+            else
+            {
+                return Int32.Parse(cardValue);
+            }
+        }
+
         public void AllCardsSum()
         {
             if (CardsCount() > 0)
             {
                 sum = 0;
-                bool flagHasA = false;
-                string[] cardWithPicValue = { "J", "Q", "K" };
-                for (int i = 0; i < cardsOnHand.Count; i++)
+                bool aceCount = false;
+                foreach (var card in cardsOnHand)
                 {
-                    if (cardWithPicValue.Contains(cardsOnHand[i].Item1))
+                    int cardValue = GetCardValue(card);
+                    sum += cardValue;
+                    if (card.Item1 == "A")
                     {
-                        sum += 10;
-                    }
-                    else if (cardsOnHand[i].Item1 == "A")
-                    {
-                        sum += 11;
-                        flagHasA = true;
-                    }
-                    else
-                    {
-                        sum += Int32.Parse(cardsOnHand[i].Item1);
+                        aceCount = true;
                     }
                 }
 
-                if (flagHasA && sum > 21)
+                if (aceCount && sum <= (21 - 10))
                 {
-                    sum -= 10;
+                    sum += 10;
                 }
             }
         }

@@ -28,7 +28,7 @@ namespace BlackJack
             alreadyGivedCards.Clear();
         }
 
-        public string WhoWins(User user, Dealer dealer)
+        public string WhoWins(User user, Dealer dealer, TextOutput textOutput)
         {
             string userCommand;
             Console.WriteLine($"Dealer cards sum -- {dealer.CardsSum()}");
@@ -47,7 +47,7 @@ namespace BlackJack
             }
             else if (userDiff == dealerDiff)
             {
-                Console.Write($"Draw! Your bank $ : {user.GetBank()}");
+                Console.WriteLine($"Draw! Your bank $ : {user.GetBank()}");
                 user.GetBank();
             }
             else
@@ -66,9 +66,9 @@ namespace BlackJack
             {
                 user.AddCard(GiveCard());
                 dealer.AddCard(GiveCard());
-                Console.WriteLine("ヽ(o ^ ▽ ^ o)/     ヽ(o ^ ▽ ^ o)>\nYour cards: ");
+                textOutput.StartPhrase();
                 user.SeeCards();
-                Console.WriteLine("1) Skip\n2) Add card\n3) Open cards\n0) End game");
+                textOutput.ChoisePhrase();
                 userCommand = Console.ReadLine()!;
             }
             else

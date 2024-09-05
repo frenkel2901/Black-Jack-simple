@@ -16,15 +16,16 @@ namespace BlackJack
                 nameInput = Console.ReadLine()!;
             } while (nameInput.Length == 0);
 
+            TextOutput textOut = new TextOutput();
             User user = new User { userName = nameInput };
             Dealer dealer = new Dealer { userName = $"{nameInput}'s Dealer" };
             Deck deckNew = new();
             user.AddCard(deckNew.GiveCard());
             dealer.AddCard(deckNew.GiveCard());
 
-            Console.WriteLine("ヽ(o ^ ▽ ^ o)/     ヽ(o ^ ▽ ^ o)>\nYour cards: ");
+            textOut.StartPhrase();
             user.SeeCards();
-            Console.WriteLine("1) Skip\n2) Add card\n3) Open cards\n0) End game");
+            textOut.ChoisePhrase();
 
             string userCommand = Console.ReadLine()!;
 
@@ -37,9 +38,8 @@ namespace BlackJack
                         {
                             dealer.AddCard(deckNew.GiveCard());
                         }
-                        Console.WriteLine("Dealer is thinking... ");
-                        Thread.Sleep(1000);
-                        Console.WriteLine("1) Skip\n2) Add card\n3) Open cards\n0) End game");
+                        textOut.DealerThink();
+                        textOut.ChoisePhrase();
                         userCommand = Console.ReadLine()!;
                         break;
                     case "2":
@@ -47,20 +47,19 @@ namespace BlackJack
                         {
                             dealer.AddCard(deckNew.GiveCard());
                         }
-                        Console.WriteLine("Dealer is thinking... ");
-                        Thread.Sleep(1000);
+                        textOut.DealerThink();
                         if (user.CardsCount() < 3)
                         {
                             user.AddCard(deckNew.GiveCard());
-                            Console.WriteLine("ヽ(o ^ ▽ ^ o)/     ヽ(o ^ ▽ ^ o)>\nYour cards: ");
+                            textOut.StartPhrase();
                             user.SeeCards();
-                            Console.WriteLine("1) Skip\n2) Add card\n3) Open cards\n0) End game");
+                            textOut.ChoisePhrase();
                             userCommand = Console.ReadLine()!;
                         }
                         else
                         {
                             Console.WriteLine("U already have 3 cards! Lets Open!");
-                            userCommand = deckNew.WhoWins(user, dealer);
+                            userCommand = deckNew.WhoWins(user, dealer, textOut);
                         }
                         break;
                     case "3":
@@ -68,12 +67,11 @@ namespace BlackJack
                         {
                             dealer.AddCard(deckNew.GiveCard());
                         }
-                        Console.WriteLine("Dealer is thinking... ");
-                        Thread.Sleep(1000);
-                        userCommand = deckNew.WhoWins(user, dealer);
+                        textOut.DealerThink();
+                        userCommand = deckNew.WhoWins(user, dealer, textOut);
                         break;
                     default:
-                        Console.WriteLine("1) Skip\n2) Add card\n3) Open cards\n0) End game");
+                        textOut.ChoisePhrase();
                         userCommand = Console.ReadLine()!;
                         break;
                 }
