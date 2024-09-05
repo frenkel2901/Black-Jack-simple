@@ -1,6 +1,6 @@
 namespace BlackJack
 {
-    class Dealer : User
+    public class Dealer : User
     {
 
         public Dealer() { }
