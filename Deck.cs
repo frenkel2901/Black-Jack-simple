@@ -5,16 +5,20 @@ namespace BlackJack
 
         private string[] cardValue = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
         private string[] cardSuite = { "♧", "♡", "♤", "♢" };
+        private Random rand;
 
         private List<Tuple<string, string>> alreadyGivedCards = [];
+
+        public Deck()
+        {
+            rand = new Random();
+        }
 
         public Tuple<string, string> GiveCard()
         {
             Tuple<string, string> tuple;
-
             do
             {
-                Random rand = new();
                 int cardValueIndex = rand.Next(cardValue.Length);
                 int cardSuiteIndex = rand.Next(cardSuite.Length);
                 tuple = Tuple.Create(cardValue[cardValueIndex], cardSuite[cardSuiteIndex]);
