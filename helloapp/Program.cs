@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.ComponentModel;
+using System.Text;
 
 namespace BlackJack
 {
@@ -8,6 +9,7 @@ namespace BlackJack
     {
         static void Main()
         {
+            Console.OutputEncoding = Encoding.UTF8;
 
             Console.Write("Enter your name: ");
             string nameInput;

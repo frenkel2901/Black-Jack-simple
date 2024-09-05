@@ -22,7 +22,7 @@ namespace BlackJackTests
             var card2 = deck.GiveCard();
 
             // Act & Assert
-            Assert.That(card1, Is.Not.EqualTo(card2)); // Исправлено
+            Assert.That(card1, Is.Not.EqualTo(card2));
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace BlackJackTests
             var newCard = deck.GiveCard();
 
             // Assert
-            Assert.That(newCard, Is.Not.Null); // Исправлено
+            Assert.That(newCard, Is.Not.Null);
         }
     }
 }
