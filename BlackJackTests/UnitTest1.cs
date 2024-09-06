@@ -33,7 +33,6 @@ namespace BlackJackTests
             deck.GiveCard();
 
             // Act
-            deck.ClearDeck();
             var newCard = deck.GiveCard();
 
             // Assert
