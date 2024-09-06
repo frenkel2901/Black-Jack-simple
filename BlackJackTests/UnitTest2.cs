@@ -124,5 +124,82 @@ namespace BlackJackTests
             // Assert
             Assert.That(sum, Is.EqualTo(9));
         }
+
+        [Test]
+        public void NameInputOutput_ShouldHaveName()
+        {
+            // Arrange
+            string name = "Name";
+
+            // Act
+            user.userName = name;
+
+            // Assert
+            Assert.That(user.userName, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void AceAceAce_ShouldHave13When3Ace()
+        {
+            // Arrange
+            var card1 = Tuple.Create("A", "♢");
+            var card2 = Tuple.Create("A", "♤");
+            var card3 = Tuple.Create("A", "♡");
+            user.AddCard(card1);
+            user.AddCard(card2);
+            user.AddCard(card3);
+
+            // Act
+            var sum = user.CardsSum();
+
+            // Assert
+            Assert.That(sum, Is.EqualTo(13));
+        }
+
+        [Test]
+        public void AceAce_ShouldHave12When2Ace()
+        {
+            // Arrange
+            var card1 = Tuple.Create("A", "♢");
+            var card2 = Tuple.Create("A", "♤");
+            user.AddCard(card1);
+            user.AddCard(card2);
+            // Act
+            var sum = user.CardsSum();
+
+            // Assert
+            Assert.That(sum, Is.EqualTo(12));
+        }
+
+        [Test]
+        public void Ace_ShouldHave11When1Ace()
+        {
+            // Arrange
+            var card1 = Tuple.Create("A", "♢");
+            user.AddCard(card1);
+            // Act
+            var sum = user.CardsSum();
+
+            // Assert
+            Assert.That(sum, Is.EqualTo(11));
+        }
+
+        [Test]
+        public void JQKCards_ShouldAdd10Points()
+        {
+            // Arrange
+            var card1 = Tuple.Create("J", "♢");
+            var card2 = Tuple.Create("Q", "♢");
+            var card3 = Tuple.Create("K", "♢");
+            user.AddCard(card1);
+            user.AddCard(card2);
+            user.AddCard(card3);
+
+            // Act
+            var sum = user.CardsSum();
+
+            // Assert
+            Assert.That(sum, Is.EqualTo(30));
+        }
     }
 }
