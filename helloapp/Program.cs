@@ -36,20 +36,12 @@ namespace BlackJack
                 switch (userCommand)
                 {
                     case "1":
-                        if (dealer.CardsSum() < 17 && dealer.CardsCount() < 3)
-                        {
-                            dealer.AddCard(deckNew.GiveCard());
-                        }
-                        textOut.DealerThink();
+                        dealer.DealerChoise(deckNew, textOut);
                         textOut.ChoisePhrase();
                         userCommand = Console.ReadLine()!;
                         break;
                     case "2":
-                        if (dealer.CardsSum() < 17 && dealer.CardsCount() < 3)
-                        {
-                            dealer.AddCard(deckNew.GiveCard());
-                        }
-                        textOut.DealerThink();
+                        dealer.DealerChoise(deckNew, textOut);
                         if (user.CardsCount() < 3)
                         {
                             user.AddCard(deckNew.GiveCard());
@@ -61,16 +53,14 @@ namespace BlackJack
                         else
                         {
                             Console.WriteLine("U already have 3 cards! Lets Open!");
-                            userCommand = deckNew.WhoWins(user, dealer, textOut);
+                            deckNew.WinnerGratz(user, dealer);
+                            userCommand = deckNew.AnotherDeckCommand(user, dealer, textOut);
                         }
                         break;
                     case "3":
-                        if (dealer.CardsSum() < 17 && dealer.CardsCount() < 3)
-                        {
-                            dealer.AddCard(deckNew.GiveCard());
-                        }
-                        textOut.DealerThink();
-                        userCommand = deckNew.WhoWins(user, dealer, textOut);
+                        dealer.DealerChoise(deckNew, textOut);
+                        deckNew.WinnerGratz(user, dealer);
+                        userCommand = deckNew.AnotherDeckCommand(user, dealer, textOut);
                         break;
                     default:
                         textOut.ChoisePhrase();

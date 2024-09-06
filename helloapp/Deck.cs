@@ -3,7 +3,7 @@ namespace BlackJack
     public class Deck
     {
 
-        private string[] cardValue = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+        private string[] cardValue = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
         private string[] cardSuite = { "♧", "♡", "♤", "♢" };
         private Random rand;
 
@@ -63,9 +63,8 @@ namespace BlackJack
             return userCommand;
         }
 
-        public string WhoWins(User user, Dealer dealer, TextOutput textOutput)
+        public void WinnerGratz(User user, Dealer dealer)
         {
-            string userCommand;
             int dealerCardSum = dealer.CardsSum();
             int userCardSum = user.CardsSum();
             int dealerDiff = 21 - dealerCardSum;
@@ -93,10 +92,6 @@ namespace BlackJack
                 dealer.SetBank(10);
                 Console.WriteLine($"You loose :_( Your bank $ : {user.GetBank()}");
             }
-
-            userCommand = AnotherDeckCommand(user, dealer, textOutput);
-
-            return userCommand;
         }
 
     }
